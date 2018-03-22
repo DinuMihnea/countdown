@@ -24,6 +24,7 @@
 </template>
 <script>
   export default {
+    name: 'countdown',
     mounted () {
       this.refresh()
     },

@@ -8,7 +8,7 @@
 import Screen from './components/Screen'
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
     Screen
   }

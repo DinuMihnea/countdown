@@ -15,6 +15,7 @@
   import FooterBar from './FooterBar'
 
   export default {
+    name: 'screen',
     components: {
       Toolbar, Countdown, FooterBar
     },
