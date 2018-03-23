@@ -15,5 +15,4 @@ router.use((req, res, next) => {
 // Routes
 router.route('/subscribers').post(subscriberRoutes)
 
-
 module.exports = router
