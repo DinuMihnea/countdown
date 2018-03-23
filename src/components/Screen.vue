@@ -5,19 +5,19 @@
       <div class="content">
         <countdown :date="date"/>
       </div>
-      <footer-bar/>
+      <subscribe-form/>
     </div>
   </section>
 </template>
 <script>
   import Toolbar from './Toolbar'
   import Countdown from './Countdown'
-  import FooterBar from './FooterBar'
+  import SubscribeForm from './SubscribeForm'
 
   export default {
     name: 'screen',
     components: {
-      Toolbar, Countdown, FooterBar
+      Toolbar, Countdown, SubscribeForm
     },
     data () {
       return {
