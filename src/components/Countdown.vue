@@ -90,7 +90,7 @@
       &:not(:first-child)
         border-left: 1px solid rgba(255,555,255, .2)
       .value
-        font-size: 56px
+        font-size: $font--size--huge
         opacity: .9
         letter-spacing: 3px
       .caption

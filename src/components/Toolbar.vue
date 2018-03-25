@@ -41,17 +41,17 @@
       height: 100%
       border-left: $border
     .item
-      color: #fff
+      color: $white
       height: 100%
       padding: 20px 20px
       display: flex
       text-transform: uppercase
-      font-size: 18px
+      font-size: $font-size--normal
       font-weight: 300
       cursor: pointer
       transition: background-color .2s
       &:hover
-        background-color: rgba(41,128,185, .4)
+        background-color: rgba($accent, .4)
     .toolbar-group
       display: flex
       flex-direction: row

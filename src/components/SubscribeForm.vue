@@ -60,16 +60,15 @@
     width: 100%
     .label
       display: block
-      font-size: 22px
+      font-size: $font-size--normal
       color: $white
       opacity: .8
       text-align: center
       font-weight: 300
       margin-bottom: 20px
-    &.h1
-      font-size: 26px
-      opacity: .9
-      margin: 10px 0 5px
+      &.h1
+        font-size: $font-size--large
+        margin: 10px 0 5px
   .form-group
     position: relative
     display: flex
@@ -84,13 +83,12 @@
         right: 0
         padding: 2px 5px
         font-weight: 500
-        font-size: 16px
-        line-height: 14px
+        line-height: $font-size--normal
         color: $red
       input
         width: 260px
         padding: 12px 5px 12px 12px
-        font-size: 16px
+        font-size: $font-size--normal
         outline: none
         color: $white
         background-color: transparent
@@ -103,7 +101,7 @@
       align-items: center
       justify-content: center
       padding: 0 30px
-      font-size: 16px
+      font-size: $font-size--normal
       text-transform: uppercase
       letter-spacing: 1px
       color: $white

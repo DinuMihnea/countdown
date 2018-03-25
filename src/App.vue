@@ -28,6 +28,7 @@ export default {
     font-family: $font-family
     font-weight: 400
     color: $white
+    font-size: $font-size--normal
   #app
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
@@ -35,6 +36,7 @@ export default {
     font-family: $font-family
     font-weight: 400
     color: $white
+    font-size: $font-size--normal
     width: 100%
     height: 100%
 </style>
