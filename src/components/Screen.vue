@@ -26,29 +26,24 @@
     }
   }
 </script>
-<style>
-  #screen {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-image: url("/static/city_of_dreams.jpg");
-  }
-
-  .wrapper {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.65);
-  }
-
-  .content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff
-  }
-
+<style lang="sass">
+  @import "../variables"
+  #screen
+    width: 100%
+    height: 100%
+    background-size: cover
+    background-position: center
+    background-image: url("/static/city_of_dreams.jpg")
+  .wrapper
+    width: 100%
+    height: 100%
+    background-color: rgba($black, 0.65)
+  .content
+    width: 100%
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    text-align: center
+    color: $white
 </style>

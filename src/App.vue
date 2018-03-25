@@ -17,7 +17,7 @@ export default {
 
 <style lang="sass">
   // TODO create font faces
-  @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&subset=cyrillic,latin-ext')
+  @import "variables"
   html, body
     overflow: hidden
     width: 100%
@@ -25,14 +25,16 @@ export default {
     margin: 0
     padding: 0
     box-sizing: border-box
-    font-family: 'Roboto', Helvetica, Arial, sans-serif
+    font-family: $font-family
     font-weight: 400
-    color: #fff
+    color: $white
   #app
     -webkit-font-smoothing: antialiased
     -moz-osx-font-smoothing: grayscale
     text-align: center
-    color: #fff
+    font-family: $font-family
+    font-weight: 400
+    color: $white
     width: 100%
     height: 100%
 </style>

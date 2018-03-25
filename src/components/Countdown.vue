@@ -76,31 +76,27 @@
     }
   }
 </script>
-<style>
-  .countdown {
-    width: 800px;
-    display: flex;
-    flex-direction: row;
-    padding: 25px 5px;
-    margin-top: -40px;
-    font-family: 'Roboto Thin', sans-serif;
-  }
-  .countdown .item {
-    flex-grow: 1;
-  }
-  .countdown .item:not(:first-child) {
-    border-left: 1px solid rgba(255,555,255, .2);
-  }
-  .countdown .item .value {
-    font-size: 56px;
-    opacity: .9;
-    letter-spacing: 3px;
-  }
-  .countdown .item .caption{
-    font-size: 20px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #2980B9;
-    font-family: 'Roboto Light', sans-serif;
-  }
+<style lang="sass">
+  @import "../variables"
+  .countdown
+    width: 800px
+    display: flex
+    flex-direction: row
+    padding: 25px 5px
+    margin-top: -40px
+    font-weight: 300
+    .item
+      flex-grow: 1
+      &:not(:first-child)
+        border-left: 1px solid rgba(255,555,255, .2)
+      .value
+        font-size: 56px
+        opacity: .9
+        letter-spacing: 3px
+      .caption
+        font-size: 20px
+        letter-spacing: 2px
+        text-transform: uppercase
+        color: $accent
+        font-weight: 300
 </style>
