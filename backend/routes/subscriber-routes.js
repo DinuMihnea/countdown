@@ -13,21 +13,21 @@ db.once('open', () => {
 })
 
 module.exports = (req, res) => {
-  if (req.body.email) {
-    let newEmail = req.body.email
+  if (req.body.subscriber) {
+    let newSubscriber = req.body.subscriber
 
-    Subscriber.findOne({ email: new RegExp(newEmail, 'i') }, (err, obj) => {
+    Subscriber.findOne({ email: new RegExp(newSubscriber.email, 'i') }, (err, obj) => {
       if (obj) {
-        res.status(400).json({message: 'Already exists!'})
+        res.status(403).json({message: 'Already exists!'})
       } else {
         let subscriber = new Subscriber()
-        subscriber.email = newEmail
+        subscriber.email = newSubscriber.email
         subscriber.save((err) => {
           if (err) {
             console.log(err)
-            res.send(err)
+            res.status(500).send(err)
           }
-          res.status(200).json({message: 'Successfully created!'})
+          res.status(201).json({message: 'Successfully created!'})
         })
       }
     })

@@ -8,8 +8,8 @@
                @keyup="validatedEmail"
                @keyup.enter="addSubscriber"
                type="text" placeholder="Email">
-        <transition name="fade">
-          <div v-if="showError" class="hint">{{errMessage}}</div>
+        <transition :name="hint.style">
+          <div v-if="hint.show" class="hint" :class="hint.style">{{hint.message}}</div>
         </transition>
       </div>
       <button class="button" @click="addSubscriber">
@@ -29,17 +29,46 @@
         },
         err: 'hint',
         isValid: false,
-        errMessage: 'Invalid email address!',
-        showError: false
+        hint: {
+          show: false,
+          style: '',
+          message: ''
+        }
       }
     },
     methods: {
       addSubscriber () {
-        if (this.isValid) {
-          this.showError = false
-          subscriberService.putSubscriber(this.subscriber.email)
+        if (this.subscriber.email.length === 0) {
+          this.hint = {
+            show: true,
+            style: 'error',
+            message: 'Email address is empty!'
+          }
+        } else if (this.isValid) {
+          this.hint.show = false
+          subscriberService.insertSubscriber(this.subscriber)
+            .then(response => {
+              if (response.status === 201) {
+                this.hint = {
+                  show: true,
+                  style: 'success',
+                  message: 'Thanks for subscribe.'
+                }
+              }
+            }).catch((err) => {
+              console.log(err)
+              this.hint = {
+                show: true,
+                style: 'error',
+                message: 'An error occurred. Please try again.'
+              }
+            })
         } else {
-          this.showError = true
+          this.hint = {
+            show: true,
+            style: 'error',
+            message: 'Invalid email address!'
+          }
         }
       },
       validatedEmail () {
@@ -78,13 +107,16 @@
     .text-field
       .hint
         position: absolute
-        bottom: -20px
+        bottom: -25px
         left: 0
         right: 0
-        padding: 2px 5px
         font-weight: 500
         line-height: $font-size--normal
-        color: $red
+        color: $white
+        &.success
+          color: $accent
+        &.error
+          color: $red
       input
         width: 260px
         padding: 12px 5px 12px 12px
@@ -111,10 +143,10 @@
       &:hover
         background-color: $accent
 
-  .fade-enter-active
+  .error-enter-active
     animation: move-error .3s
-  .fade-enter-active, .fade-leave-active
+  .error-enter-active, .error-leave-active, .success-enter-active, .success-leave-active
     transition: opacity .3s
-  .fade-enter, .fade-leave-to
+  .error-enter, .error-leave-to, .success-enter, .success-leave-to
     opacity: 0
 </style>
