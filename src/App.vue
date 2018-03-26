@@ -16,7 +16,6 @@ export default {
 </script>
 
 <style lang="sass">
-  // TODO create font faces
   @import "variables"
   html, body
     overflow: hidden
@@ -38,5 +37,15 @@ export default {
     color: $white
     font-size: $font-size--normal
     width: 100%
+    min-width: 300px
     height: 100%
+    min-height: 500px
+    position: relative
+    box-sizing: border-box
+  @media screen and (max-height: 500px)
+    body
+      overflow-y: auto
+  @media screen and (max-width: 300px)
+    body
+      overflow-x: auto
 </style>

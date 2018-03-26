@@ -22,6 +22,7 @@ module.exports = (req, res) => {
       } else {
         let subscriber = new Subscriber()
         subscriber.email = newSubscriber.email
+        subscriber.date = newSubscriber.date
         subscriber.save((err) => {
           if (err) {
             console.log(err)

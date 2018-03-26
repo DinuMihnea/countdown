@@ -8,6 +8,9 @@
                @keyup="validatedEmail"
                @keyup.enter="addSubscriber"
                type="text" placeholder="Email">
+        <transition name="fade">
+          <div v-if="showProgress" class="progress-bar"></div>
+        </transition>
         <transition :name="hint.style">
           <div v-if="hint.show" class="hint" :class="hint.style">{{hint.message}}</div>
         </transition>
@@ -29,6 +32,7 @@
         },
         err: 'hint',
         isValid: false,
+        showProgress: false,
         hint: {
           show: false,
           style: '',
@@ -38,14 +42,17 @@
     },
     methods: {
       addSubscriber () {
+        this.showProgress = true
+        this.hint.show = false
         if (this.subscriber.email.length === 0) {
           this.hint = {
             show: true,
             style: 'error',
             message: 'Email address is empty!'
           }
+          this.showProgress = false
         } else if (this.isValid) {
-          this.hint.show = false
+          this.subscriber.date = new Date()
           subscriberService.insertSubscriber(this.subscriber)
             .then(response => {
               if (response.status === 201) {
@@ -55,6 +62,7 @@
                   message: 'Thanks for subscribe.'
                 }
               }
+              this.showProgress = false
             }).catch((err) => {
               console.log(err)
               this.hint = {
@@ -62,6 +70,7 @@
                 style: 'error',
                 message: 'An error occurred. Please try again.'
               }
+              this.showProgress = false
             })
         } else {
           this.hint = {
@@ -69,6 +78,7 @@
             style: 'error',
             message: 'Invalid email address!'
           }
+          this.showProgress = false
         }
       },
       validatedEmail () {
@@ -99,12 +109,15 @@
         font-size: $font-size--large
         margin: 10px 0 5px
   .form-group
+    width: 500px
+    margin: 0 auto 40px
     position: relative
     display: flex
     justify-content: center
-    margin-bottom: 40px
     text-align: center
+    align-items: stretch
     .text-field
+      flex-grow: 3
       .hint
         position: absolute
         bottom: -25px
@@ -118,8 +131,9 @@
         &.error
           color: $red
       input
-        width: 260px
+        width: 100%
         padding: 12px 5px 12px 12px
+        box-sizing: border-box
         font-size: $font-size--normal
         outline: none
         color: $white
@@ -127,12 +141,14 @@
         border: $border
         border-right: none
     .button
+      flex-grow: 2
       outline: none
       border: none
       display: flex
       align-items: center
       justify-content: center
-      padding: 0 30px
+      box-sizing: border-box
+      padding: 0 20px
       font-size: $font-size--normal
       text-transform: uppercase
       letter-spacing: 1px
@@ -142,11 +158,59 @@
       transition: background-color .3s
       &:hover
         background-color: $accent
-
+    .progress-bar
+      position: absolute
+      bottom: -3px
+      height: 3px
+      width: 100%
+      background-color: rgba($white, 0.9)
+      overflow: hidden
+      &:before
+        content: ''
+        position: absolute
+        background-color: $accent
+        top: 0
+        left: 0
+        bottom: 0
+        will-change: left, right
+        animation: indeterminate 1.6s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite
+      &:after
+        content: ''
+        position: absolute
+        background-color: $accent
+        top: 0
+        left: 0
+        bottom: 0
+        will-change: left, right
+        animation: indeterminate-short 1.6s cubic-bezier(0.165, 0.84, 0.44, 1) infinite
+        animation-delay: 1s
+  @keyframes indeterminate
+    0%
+      left: -35%
+      right: 100%
+    60%
+      left: 100%
+      right: -90%
+    100%
+      left: 100%
+      right: -90%
+  @keyframes indeterminate-short
+    0%
+      left: -200%
+      right: 100%
+    60%
+      left: 107%
+      right: -8%
+    100%
+      left: 107%
+      right: -8%
   .error-enter-active
     animation: move-error .3s
-  .error-enter-active, .error-leave-active, .success-enter-active, .success-leave-active
+  .error-enter-active, .error-leave-active, .success-enter-active, .success-leave-active, .fade-enter-active, .fade-leave-active
     transition: opacity .3s
-  .error-enter, .error-leave-to, .success-enter, .success-leave-to
+  .error-enter, .error-leave-to, .success-enter, .success-leave-to, .fade-enter, .fade-leave-to
     opacity: 0
+  @media screen and (max-width: 600px)
+    .form-group
+      width: 95%
 </style>

@@ -90,7 +90,7 @@
       &:not(:first-child)
         border-left: 1px solid rgba(255,555,255, .2)
       .value
-        font-size: $font--size--huge
+        font-size: $font-size--huge
         opacity: .9
         letter-spacing: 3px
       .caption
@@ -99,4 +99,20 @@
         text-transform: uppercase
         color: $accent
         font-weight: 300
+  @media screen and (max-width: 800px)
+    .countdown
+      width: 100%
+      .item
+        .value
+          font-size: ($font-size--huge - 2)
+        .caption
+          font-size: ($font-size--normal - 2)
+  @media screen and (max-width: 500px)
+    .countdown
+      width: 100%
+      .item
+        .value
+          font-size: ($font-size--huge - 4)
+        .caption
+          font-size: ($font-size--normal - 4)
 </style>
