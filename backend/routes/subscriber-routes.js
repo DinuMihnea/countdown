@@ -2,6 +2,7 @@
 
 const config = require('../config/config')
 const Subscriber = require('../models/subscriber')
+const emailService = require('../email/email-service')
 
 // Database connection
 const mongoose = require('mongoose')
@@ -29,6 +30,7 @@ module.exports = (req, res) => {
             res.status(500).send(err)
           }
           res.status(201).json({message: 'Successfully created!'})
+          emailService.sendMail(subscriber.email)
         })
       }
     })
