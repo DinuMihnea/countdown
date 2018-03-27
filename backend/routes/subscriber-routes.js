@@ -31,6 +31,11 @@ module.exports = (req, res) => {
           }
           res.status(201).json({message: 'Successfully created!'})
           emailService.sendMail(subscriber.email)
+            .then(response => {
+              console.log(response)
+            }).catch(err => {
+              console.log(err)
+            })
         })
       }
     })
