@@ -13,7 +13,7 @@ db.once('open', () => {
   console.log('DB connected.')
 })
 
-module.exports = {
+let subscriberRoutes = {
   insertSubscriber (req, res) {
     if (req.body.subscriber) {
       let newSubscriber = req.body.subscriber
@@ -50,3 +50,5 @@ module.exports = {
     }
   }
 }
+
+module.exports = subscriberRoutes

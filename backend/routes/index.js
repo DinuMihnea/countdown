@@ -1,6 +1,7 @@
 const parser = require('body-parser')
 const router = require('express').Router()
 const subscriberRoutes = require('./subscriber-routes')
+const countdownRoutes = require('./countdown-routes')
 
 // Router configurations
 router.use(parser.json())
@@ -14,5 +15,6 @@ router.use((req, res, next) => {
 
 // Routes
 router.route('/subscribers').post(subscriberRoutes.insertSubscriber)
+router.route('/countdown').get(countdownRoutes.getTarget)
 
 module.exports = router
