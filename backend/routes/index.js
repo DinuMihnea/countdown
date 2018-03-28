@@ -13,6 +13,6 @@ router.use((req, res, next) => {
 })
 
 // Routes
-router.route('/subscribers').post(subscriberRoutes)
+router.route('/subscribers').post(subscriberRoutes.insertSubscriber)
 
 module.exports = router
