@@ -1,5 +1,5 @@
 module.exports = {
-  'COUNTDOWN_TARGET': new Date(2018, 4, 20, 20),
+  'COUNTDOWN_TARGET': new Date(2018, 4, 20, 20).getTime(),
   'DR_URL': 'mongodb://localhost:27017/countdown',
   'SECRET': 'SECRET',
   'EMAIL_SERVICE': 'gmail',

@@ -14,6 +14,7 @@
     </div>
     <div class="item">
       <transition name="fade">
+        <!--TODO add transition-->
         <div class="value">
           {{seconds | validation}}
         </div>
@@ -23,23 +24,16 @@
   </div>
 </template>
 <script>
+  import {countdownService} from '@/services/countdown-service'
+
   export default {
     name: 'countdown',
     mounted () {
-      this.refresh()
-    },
-    props: {
-      date: {
-        type: Date,
-        required: true,
-        validator: function (value) {
-          return value.getTime() > new Date().getTime()
-        }
-      }
+      this.init()
     },
     data () {
       return {
-        target: this.date,
+        target: new Date(),
         now: new Date()
       }
     },
@@ -61,6 +55,15 @@
       }
     },
     methods: {
+      init: function () {
+        countdownService.getTarget()
+          .then((value) => {
+            if (value != null) {
+              this.target = new Date(value)
+              this.refresh()
+            }
+          })
+      },
       refresh: function () {
         let now = new Date()
         if (this.target > now) {

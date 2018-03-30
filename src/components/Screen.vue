@@ -3,7 +3,7 @@
     <div class="wrapper">
       <toolbar/>
       <div class="content">
-        <countdown :date="date"/>
+        <countdown/>
       </div>
       <subscribe-form/>
     </div>
@@ -18,11 +18,6 @@
     name: 'screen',
     components: {
       Toolbar, Countdown, SubscribeForm
-    },
-    data () {
-      return {
-        date: new Date(2018, 4, 20, 20)
-      }
     }
   }
 </script>
