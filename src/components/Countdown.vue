@@ -1,22 +1,28 @@
 <template>
   <div class="countdown">
     <div class="item">
-      <div class="value">{{days | validation}}</div>
+      <div class="value">
+        <animation-number :value="days"/>
+      </div>
       <div class="caption">Days</div>
     </div>
     <div class="item">
-      <div class="value">{{hours | validation}}</div>
+      <div class="value">
+        <animation-number :value="hours"/>
+      </div>
       <div class="caption">Hours</div>
     </div>
     <div class="item">
-      <div class="value">{{minutes | validation}}</div>
+      <div class="value">
+        <animation-number :value="minutes"/>
+      </div>
       <div class="caption">Minutes</div>
     </div>
     <div class="item">
       <transition name="fade">
         <!--TODO add transition-->
         <div class="value">
-          {{seconds | validation}}
+          <animation-number :value="seconds"/>
         </div>
       </transition>
       <div class="caption">Seconds</div>
@@ -25,9 +31,11 @@
 </template>
 <script>
   import {countdownService} from '@/services/countdown-service'
+  import AnimationNumber from './AnimationNumber'
 
   export default {
     name: 'countdown',
+    components: { AnimationNumber },
     mounted () {
       this.init()
     },
