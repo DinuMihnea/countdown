@@ -79,11 +79,6 @@
           setTimeout(this.refresh, 1000)
         }
       }
-    },
-    filters: {
-      validation: function (value) {
-        return (value < 0) ? 0 : value
-      }
     }
   }
 </script>

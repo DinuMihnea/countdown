@@ -1,5 +1,5 @@
 <template>
-  <span>{{ tweeningValue }}</span>
+  <span>{{ tweeningValue | noNegative }}</span>
 </template>
 
 <script>
@@ -42,6 +42,11 @@
             .start()
 
           animate()
+        }
+      },
+      filters: {
+        noNegative: function (value) {
+          return (value < 0) ? 0 : value
         }
       }
     }
