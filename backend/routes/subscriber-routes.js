@@ -2,7 +2,6 @@
 
 const config = require('../config/config')
 const Subscriber = require('../models/subscriber')
-const emailService = require('../email/email-service')
 
 // Database connection
 const mongoose = require('mongoose')
@@ -33,14 +32,6 @@ let subscriberRoutes = {
             }
             res.status(201).json({message: 'Successfully created!'})
             console.log(`Subscriber with email ${subscriber.email} successfully crated.`)
-
-            // TODO send mail to all subscribers when countdown is end
-            emailService.sendMail(subscriber.email)
-              .then(response => {
-                console.log(`Mail has been successfully sent to ${response.accepted}`)
-              }).catch(err => {
-                console.log(`ERROR: An error occurred during email sending: ${err}`)
-              })
           })
         }
       })
