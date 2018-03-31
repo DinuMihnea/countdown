@@ -1,3 +1,4 @@
+const config = require('./config/config')
 const express = require('express')
 const routes = require('./routes')
 const app = express()
@@ -8,6 +9,6 @@ app.use('/api', routes)
 if (!module.parent) {
   app.listen(port, () => {
     console.log(`Listening starts on port: ${port}`)
-    emailService.startEmailCountdown()
+    if (config.IS_PRODUCTION) { emailService.startEmailCountdown() }
   })
 }
