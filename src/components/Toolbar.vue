@@ -2,13 +2,18 @@
   <header class="toolbar">
     <div class="left-tools">
       <div class="toolbar-group">
-        <div class="item">RO</div>
-        <div class="item">RU</div>
+        <div class="item"
+             v-for="item in languages"
+             :key="item.lang"
+             @click="switchLocale(item)"
+             :title="item.name"
+             :class="item.isActive ? 'active' : ''"
+        >{{ item.lang }}</div>
       </div>
     </div>
     <div class="right-tools">
       <div class="toolbar-group">
-        <div class="item">About Us</div>
+        <div class="item">{{ $t("messages.toolbar.aboutUs") }}</div>
       </div>
     </div>
   </header>
@@ -16,9 +21,43 @@
 <script>
   export default {
     name: 'toolbar',
+    mounted () {
+      let lang = window.localStorage.getItem('lang') || 'en'
+      this.activeItem(lang)
+    },
     data () {
       return {
-
+        languages: [
+          {
+            lang: 'en',
+            name: 'English',
+            isActive: false
+          },
+          {
+            lang: 'ro',
+            name: 'Română',
+            isActive: false
+          },
+          {
+            lang: 'ru',
+            name: 'Русский',
+            isActive: false
+          }
+        ]
+      }
+    },
+    methods: {
+      switchLocale (item) {
+        if (this.$i18n.locale !== item.lang) {
+          this.$i18n.locale = item.lang
+          window.localStorage.setItem('lang', item.lang)
+          this.activeItem(item.lang)
+        }
+      },
+      activeItem (lang) {
+        this.languages.forEach((item) => {
+          item.isActive = item.lang === lang
+        })
       }
     }
   }
@@ -50,6 +89,10 @@
       font-weight: 300
       cursor: pointer
       transition: background-color .2s
+      opacity: .85
+      &.active
+        font-weight: 500
+        opacity: 1
       &:hover
         background-color: rgba($accent, .4)
     .toolbar-group

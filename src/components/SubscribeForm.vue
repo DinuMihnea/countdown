@@ -1,13 +1,14 @@
 <template>
   <div class="subscribe-form">
-    <div class="label h1">Email Notifications</div>
-    <div class="label">Subscribe to see all our newsletters!</div>
+    <div class="label h1">{{ $t('messages.subscribeForm.title') }}</div>
+    <div class="label">{{ $t('messages.subscribeForm.text') }}</div>
     <div class="form-group">
       <div class="text-field">
         <input v-model="subscriber.email"
                @keyup="validatedEmail"
                @keyup.enter="addSubscriber"
-               type="text" placeholder="Email">
+               type="text"
+               :placeholder="$t('messages.subscribeForm.inputPlaceholder')">
         <transition name="fade">
           <div v-if="showProgress" class="progress-bar"></div>
         </transition>
@@ -16,7 +17,7 @@
         </transition>
       </div>
       <button class="button" @click="addSubscriber">
-        <span>Subscribe</span>
+        <span>{{ $t('messages.subscribeForm.buttonCaption') }}</span>
       </button>
     </div>
   </div>
@@ -45,11 +46,11 @@
         this.showProgress = true
         this.hint.show = false
         if (this.subscriber.email.length === 0) {
-          this.showError('Email address is empty!')
+          this.showError(this.$t('messages.subscribeForm.hint.error.empty'))
         } else if (this.isValid) {
           this.sendSubscriber()
         } else {
-          this.showError('Invalid email address!')
+          this.showError(this.$t('messages.subscribeForm.hint.error.invalid'))
         }
       },
       async sendSubscriber () {
@@ -57,13 +58,13 @@
         try {
           const status = await subscriberService.insertSubscriber(this.subscriber)
           if (status === 201) {
-            this.showSuccessNotification('Thanks for subscribe.')
+            this.showSuccessNotification(this.$t('messages.subscribeForm.hint.success'))
           } else {
-            this.showError('An error occurred. Please try again.')
+            this.showError(this.$t('messages.subscribeForm.hint.error.server'))
           }
         } catch (error) {
           console.log(error)
-          this.showError('An error occurred. Please try again.')
+          this.showError(this.$t('messages.subscribeForm.hint.error.server'))
         }
       },
       showError: function (message) {

@@ -4,25 +4,25 @@
       <div class="value">
         <animation-number :value="days"/>
       </div>
-      <div class="caption">Days</div>
+      <div class="caption">{{ $t('messages.countdown.days') }}</div>
     </div>
     <div class="item">
       <div class="value">
         <animation-number :value="hours"/>
       </div>
-      <div class="caption">Hours</div>
+      <div class="caption">{{ $t('messages.countdown.hours') }}</div>
     </div>
     <div class="item">
       <div class="value">
         <animation-number :value="minutes"/>
       </div>
-      <div class="caption">Minutes</div>
+      <div class="caption">{{ $t('messages.countdown.minutes') }}</div>
     </div>
     <div class="item">
       <div class="value">
         <animation-number :value="seconds"/>
       </div>
-      <div class="caption">Seconds</div>
+      <div class="caption">{{ $t('messages.countdown.seconds') }}</div>
     </div>
   </div>
 </template>
