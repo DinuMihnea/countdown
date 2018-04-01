@@ -5,8 +5,13 @@
 ## Build Setup
 
 ``` bash
+# run your mongodb server
+
 # install dependencies
 npm install
+
+# start backend on localhost:3000
+npm start-backend
 
 # serve with hot reload at localhost:8080
 npm run dev
