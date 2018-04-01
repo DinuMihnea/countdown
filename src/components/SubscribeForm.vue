@@ -45,41 +45,42 @@
         this.showProgress = true
         this.hint.show = false
         if (this.subscriber.email.length === 0) {
-          this.hint = {
-            show: true,
-            style: 'error',
-            message: 'Email address is empty!'
-          }
-          this.showProgress = false
+          this.showError('Email address is empty!')
         } else if (this.isValid) {
-          this.subscriber.date = new Date()
-          subscriberService.insertSubscriber(this.subscriber)
-            .then(response => {
-              if (response.status === 201) {
-                this.hint = {
-                  show: true,
-                  style: 'success',
-                  message: 'Thanks for subscribe.'
-                }
-              }
-              this.showProgress = false
-            }).catch((err) => {
-              console.log(err)
-              this.hint = {
-                show: true,
-                style: 'error',
-                message: 'An error occurred. Please try again.'
-              }
-              this.showProgress = false
-            })
+          this.sendSubscriber()
         } else {
-          this.hint = {
-            show: true,
-            style: 'error',
-            message: 'Invalid email address!'
-          }
-          this.showProgress = false
+          this.showError('Invalid email address!')
         }
+      },
+      async sendSubscriber () {
+        this.subscriber.date = new Date()
+        try {
+          const status = await subscriberService.insertSubscriber(this.subscriber)
+          if (status === 201) {
+            this.showSuccessNotification('Thanks for subscribe.')
+          } else {
+            this.showError('An error occurred. Please try again.')
+          }
+        } catch (error) {
+          console.log(error)
+          this.showError('An error occurred. Please try again.')
+        }
+      },
+      showError: function (message) {
+        this.hint = {
+          show: true,
+          style: 'error',
+          message: message
+        }
+        this.showProgress = false
+      },
+      showSuccessNotification: function (message) {
+        this.hint = {
+          show: true,
+          style: 'success',
+          message: message
+        }
+        this.showProgress = false
       },
       validatedEmail () {
         // eslint-disable-next-line
