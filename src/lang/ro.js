@@ -16,6 +16,7 @@ export default {
       buttonCaption: 'Abonează-te',
       hint: {
         error: {
+          alreadyExists: 'Există deja un abonat cu acest email!',
           empty: 'Câmpul adresei de email este gol!',
           invalid: 'Adresa email invalidă!',
           server: 'A apărut o eroare. Vă rugăm să încercați din nou mai târziu.'

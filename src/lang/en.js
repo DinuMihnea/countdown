@@ -16,6 +16,7 @@ export default {
       buttonCaption: 'Subscribe',
       hint: {
         error: {
+          alreadyExists: 'A subscriber withs this email already exists!',
           empty: 'Email address field is empty!',
           invalid: 'Invalid email address!',
           server: 'An error occurred. Please try again later.'

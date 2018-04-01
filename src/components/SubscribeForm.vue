@@ -59,11 +59,12 @@
           const status = await subscriberService.insertSubscriber(this.subscriber)
           if (status === 201) {
             this.showSuccessNotification(this.$t('messages.subscribeForm.hint.success'))
+          } else if (status === 403) {
+            this.showError(this.$t('messages.subscribeForm.hint.error.alreadyExists'))
           } else {
             this.showError(this.$t('messages.subscribeForm.hint.error.server'))
           }
         } catch (error) {
-          console.log(error)
           this.showError(this.$t('messages.subscribeForm.hint.error.server'))
         }
       },
