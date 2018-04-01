@@ -19,12 +19,9 @@
       <div class="caption">Minutes</div>
     </div>
     <div class="item">
-      <transition name="fade">
-        <!--TODO add transition-->
-        <div class="value">
-          <animation-number :value="seconds"/>
-        </div>
-      </transition>
+      <div class="value">
+        <animation-number :value="seconds"/>
+      </div>
       <div class="caption">Seconds</div>
     </div>
   </div>
@@ -63,14 +60,14 @@
       }
     },
     methods: {
-      init: function () {
-        countdownService.getTarget()
-          .then((value) => {
-            if (value != null) {
-              this.target = new Date(value)
-              this.refresh()
-            }
-          })
+      async init () {
+        try {
+          let value = await countdownService.getTarget()
+          this.target = new Date(value)
+          this.refresh()
+        } catch (error) {
+          this.target = new Date()
+        }
       },
       refresh: function () {
         let now = new Date()
