@@ -13,22 +13,31 @@
     </div>
     <div class="right toolbar-group">
       <div class="">
-        <div class="item">
+        <div class="item" @click="showPopup = true">
           <span>{{ $t("messages.toolbar.aboutUs") }}</span>
         </div>
       </div>
     </div>
+    <modal v-if="showPopup" @close="showPopup = false">
+      <span slot="header">{{$t("messages.toolbar.modalTitle")}}</span>
+      <span slot="body">{{$t("messages.toolbar.modalText")}}</span>
+    </modal>
   </header>
 </template>
 <script>
+  import Modal from './Modal'
   export default {
     name: 'toolbar',
+    components: {
+      Modal
+    },
     mounted () {
       let lang = window.localStorage.getItem('lang') || 'en'
       this.activeItem(lang)
     },
     data () {
       return {
+        showPopup: false,
         languages: [
           {
             lang: 'en',
