@@ -10,8 +10,11 @@
 # install dependencies
 npm install
 
+# start typescript compiler
+npm run ts
+
 # start backend on localhost:3000
-npm start-backend
+npm run server
 
 # serve with hot reload at localhost:8080
 npm run dev
