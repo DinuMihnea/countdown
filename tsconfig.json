@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "outDir": "./backend/build",
+    "sourceMap": true
+  },
+  "lib": ["es6"],
+  "files": [
+    "./node_modules/@types/node/index.d.ts"
+  ],
+  "include": [
+    "./backend/src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
