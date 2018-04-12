@@ -56,16 +56,18 @@
       async sendSubscriber () {
         this.subscriber.date = new Date()
         try {
-          const status = await subscriberService.insertSubscriber(this.subscriber)
-          if (status === 201) {
+          const response = await subscriberService.insertSubscriber(this.subscriber)
+          if (response.data.email === this.subscriber.email) {
             this.showSuccessNotification(this.$t('messages.subscribeForm.hint.success'))
-          } else if (status === 403) {
-            this.showError(this.$t('messages.subscribeForm.hint.error.alreadyExists'))
           } else {
             this.showError(this.$t('messages.subscribeForm.hint.error.server'))
           }
         } catch (error) {
-          this.showError(this.$t('messages.subscribeForm.hint.error.server'))
+          if (error === 11000) {
+            this.showError(this.$t('messages.subscribeForm.hint.error.alreadyExists'))
+          } else {
+            this.showError(this.$t('messages.subscribeForm.hint.error.server'))
+          }
         }
       },
       showError: function (message) {
